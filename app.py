@@ -1,34 +1,44 @@
-# 📦 Análise de KPIs Logísticos
+app.py
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
 
-Este projeto é uma aplicação web simples para análise de dados logísticos focada em entregas. Desenvolvido com Python e Streamlit, ele permite o upload de um arquivo CSV contendo dados de entregas e gera indicadores chave (KPIs) e gráficos para facilitar a visualização do desempenho logístico.
+st.set_page_config(page_title="Análise de Entregas", layout="wide")
 
----
+st.title("📦 Análise de KPIs Logísticos")
 
-## Funcionalidades
+# Upload do CSV
+arquivo = st.file_uploader("Envie o arquivo de entregas (.csv)", type="csv")
 
-- Upload de arquivo CSV contendo dados de entregas
-- Cálculo dos principais indicadores:
-  - Total de entregas
-  - Percentual de entregas com atraso
-  - Tempo médio de entrega (em dias)
-  - Custo total das entregas
-- Gráfico de barras com a quantidade de entregas por região
-- Visualização dos dados brutos em tabela interativa
+if arquivo:
+    df = pd.read_csv(arquivo)
 
----
+    # Indicadores
+    total_entregas = len(df)
+    percentual_atraso = (df['dias_atraso'] > 0).mean() * 100
+    tempo_medio = df['tempo_entrega'].mean()
+    custo_total = df['custo'].sum()
 
-## Tecnologias Utilizadas
+    # KPIs
+    st.subheader("📊 Indicadores Principais")
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Total de entregas", total_entregas)
+    col2.metric("Com atraso", f"{percentual_atraso:.2f}%")
+    col3.metric("Tempo médio", f"{tempo_medio:.2f} dias")
+    col4.metric("Custo total", f"R$ {custo_total:,.2f}")
 
-- Python 3.x
-- [Streamlit](https://streamlit.io/) (para a interface web)
-- [Pandas](https://pandas.pydata.org/) (para manipulação de dados)
-- [Matplotlib](https://matplotlib.org/) (para geração de gráficos)
+    # Gráfico por região
+    st.subheader("📍 Entregas por Região")
+    entregas_por_regiao = df.groupby('regiao')['id_entrega'].count().sort_values(ascending=False)
 
----
+    fig, ax = plt.subplots()
+    entregas_por_regiao.plot(kind='bar', ax=ax, color='#4F81BD')
+    ax.set_ylabel("Quantidade de Entregas")
+    ax.set_xlabel("Região")
+    st.pyplot(fig)
 
-## Como usar
-
-1. Clone este repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
-   cd seu-repositorio
+    # Mostrar dados brutos
+    st.subheader("📁 Dados da Tabela")
+    st.dataframe(df)
+else:
+    st.info("Faça o upload de um arquivo CSV para iniciar a análise.")
