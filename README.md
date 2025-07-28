@@ -1,34 +1,49 @@
-# 📦 Análise de KPIs Logísticos
+# 📦 Análise de KPIs Logísticos com Streamlit
 
-Este projeto é uma aplicação web simples para análise de dados logísticos focada em entregas. Desenvolvido com Python e Streamlit, ele permite o upload de um arquivo CSV contendo dados de entregas e gera indicadores chave (KPIs) e gráficos para facilitar a visualização do desempenho logístico.
+Este projeto é uma aplicação interativa desenvolvida com Python e Streamlit para analisar dados logísticos de entregas. Ele permite importar um arquivo `.csv` com os dados, calcular indicadores importantes (KPIs) e visualizar gráficos com destaques para regiões com alto ou baixo desempenho.
 
 ---
 
-## Funcionalidades
+## ✅ Funcionalidades
 
-- Upload de arquivo CSV contendo dados de entregas
-- Cálculo dos principais indicadores:
+- Upload de arquivo CSV com dados de entregas
+- Cálculo automático dos KPIs:
   - Total de entregas
   - Percentual de entregas com atraso
-  - Tempo médio de entrega (em dias)
-  - Custo total das entregas
-- Gráfico de barras com a quantidade de entregas por região
-- Visualização dos dados brutos em tabela interativa
+  - Tempo médio de entrega
+  - Custo total
+- Gráfico de entregas por região com **códigos de cores**:
+  - 🟩 Verde: Regiões com ≤ 20% de atraso
+  - 🟥 Vermelho: Regiões com > 20% de atraso
+- Exibição da tabela de dados original
 
 ---
 
-## Tecnologias Utilizadas
+## 🛠 Tecnologias utilizadas
 
 - Python 3.x
-- [Streamlit](https://streamlit.io/) (para a interface web)
-- [Pandas](https://pandas.pydata.org/) (para manipulação de dados)
-- [Matplotlib](https://matplotlib.org/) (para geração de gráficos)
+- [Streamlit](https://streamlit.io/)
+- [Pandas](https://pandas.pydata.org/)
+- [Matplotlib](https://matplotlib.org/)
 
 ---
 
-## Como usar
+## 🗂 Estrutura esperada do CSV
 
-1. Clone este repositório:
+Seu arquivo `.csv` deve conter as seguintes colunas:
+
+| Coluna         | Descrição                                |
+|----------------|------------------------------------------|
+| `id_entrega`   | Identificador único da entrega           |
+| `dias_atraso`  | Quantidade de dias de atraso da entrega  |
+| `tempo_entrega`| Tempo total da entrega em dias           |
+| `custo`        | Custo da entrega                         |
+| `regiao`       | Nome da região onde a entrega foi feita  |
+
+---
+
+## ▶️ Como executar o projeto
+
+1. **Instale as bibliotecas necessárias** (caso ainda não tenha):
    ```bash
-   git clone https://github.com/seu-usuario/seu-repositorio.git
-   cd seu-repositorio
+   pip install streamlit pandas matplotlib
