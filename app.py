@@ -37,7 +37,7 @@ if arquivo:
     # Gráfico menor e colorido
     st.subheader("📍 Entregas por Região (cores indicam % de atraso)")
 
-    fig, ax = plt.subplots(figsize=(3, 3))
+    fig, ax = plt.subplots(figsize=(3, 6))
     entregas_por_regiao.plot(kind='bar', ax=ax, color=colors)
     ax.set_ylabel("Quantidade de Entregas")
     ax.set_xlabel("Região")
