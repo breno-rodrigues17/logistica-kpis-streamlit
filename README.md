@@ -21,7 +21,7 @@ Este projeto é uma aplicação interativa desenvolvida com Python e Streamlit p
 
 ## 🛠 Tecnologias utilizadas
 
-- Python 3.x
+- Python 
 - [Streamlit](https://streamlit.io/)
 - [Pandas](https://pandas.pydata.org/)
 - [Matplotlib](https://matplotlib.org/)
